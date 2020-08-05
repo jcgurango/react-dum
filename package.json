@@ -1,6 +1,6 @@
 {
   "name": "react-dum",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "React package for rendering to a plain JS object, with a callback whenever the tree changes.",
   "main": "index.js",
   "scripts": {

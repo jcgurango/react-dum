@@ -36,8 +36,11 @@ const reconciler = Reconciler({
     return false;
   },
   prepareForCommit: function(rootContainerInstance) { },
-  resetAfterCommit: function(rootContainerInstance) { },
+  resetAfterCommit: function(rootContainerInstance) {
+    rootContainerInstance.reportDom();
+  },
   prepareUpdate: function (instance, type, oldProps, newProps, rootContainerInstance, currentHostContext) {
+    instance.props = newProps;
     return;
   },
   commitUpdate: function(instance, updatePayload, type, oldProps, newProps, finishedWork) {
@@ -45,15 +48,12 @@ const reconciler = Reconciler({
   },
   appendChildToContainer: function(rootContainerInstance, child) {
     rootContainerInstance.dom.push(child);
-    rootContainerInstance.reportDom();
   },
   commitTextUpdate: function(textInstance, oldText, newText) {
     textInstance.props.content = newText;
-    textInstance.root.reportDom();
   },
   appendChild: function(parentInstance, child) {
     parent.children.push(child);
-    parentInstance.root.reportDom();
   },
   insertBefore: function(parentInstance, child, beforeChild) {
     parentInstance.children.splice(
@@ -61,19 +61,15 @@ const reconciler = Reconciler({
       0,
       child,
     );
-    parentInstance.root.reportDom();
   },
   removeChild: function(parentInstance, child) {
     parentInstance.children.splice(parentInstance.children.indexOf(child), 1);
-    parentInstance.root.reportDom();
   },
   insertInContainerBefore: function(container, child, beforeChild) {
     container.dom.splice(container.dom.indexOf(beforeChild), 0, 1);
-    container.reportDom();
   },
   removeChildFromContainer: function(container, child) {
     container.dom.splice(container.dom.indexOf(child), 1);
-    container.reportDom();
   },
   resetTextContent: function(child) { },
   shouldDeprioritizeSubtree(type, nextProps) {
