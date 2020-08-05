@@ -53,7 +53,7 @@ const reconciler = Reconciler({
     textInstance.props.content = newText;
   },
   appendChild: function(parentInstance, child) {
-    parent.children.push(child);
+    parentInstance.children.push(child);
   },
   insertBefore: function(parentInstance, child, beforeChild) {
     parentInstance.children.splice(
